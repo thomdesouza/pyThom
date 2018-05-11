@@ -1,13 +1,13 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from astroML.datasets import fetch_rrlyrae_combined
-from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegressionCV
 from sklearn import metrics
 
 #Classifier Parametrization
 print('')
-classificador = SVC()
-print('Classification Algorithm: SVM')
+classificador = LogisticRegressionCV()
+print('Classification Algorithm: Logistic Regression CV')
 
 # as páginas citadas referem-se ao livro AstroML (Ivezic et al., 2014)
 #----------------------------------------------------------------------
@@ -59,6 +59,14 @@ print('Resumed Report:')
 target_names = ['class 0    (stars)', 'class 1 (RR-Lyrae)']
 print(metrics.classification_report(y, y_pred, target_names=target_names))
 print('F1-Score:', metrics.f1_score(y, y_pred))
+prob = classificador.predict_proba(X) #pág. 397
+# Compute precision / recall curve
+pr , re , thresh = metrics.precision_recall_curve(y, prob[:, 0])
+# Compute ROC curve:true positives / false positives
+tpr , fpr , thresh = metrics.roc_curve(y, prob[:, 0])
+# Compute AUC (area under ROC curve):
+auc = metrics.roc_auc_score(y, prob[:, 0])
+print('AUC:', auc)
 # Plot ROC curve
 fig = plt.figure(figsize=(5, 2.5))
 fig.subplots_adjust(left=0.1, right=0.95, bottom=0.15, top=0.9, wspace=0.25)

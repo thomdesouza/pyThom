@@ -1,13 +1,13 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from astroML.datasets import fetch_rrlyrae_combined
-from sklearn.svm import SVC
+from sklearn.linear_model import SGDClassifier
 from sklearn import metrics
 
 #Classifier Parametrization
 print('')
-classificador = SVC()
-print('Classification Algorithm: SVM')
+classificador = SGDClassifier()
+print('Classification Algorithm: SGD')
 
 # as páginas citadas referem-se ao livro AstroML (Ivezic et al., 2014)
 #----------------------------------------------------------------------

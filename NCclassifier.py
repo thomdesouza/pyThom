@@ -1,13 +1,13 @@
 import numpy as np
 from matplotlib import pyplot as plt
 from astroML.datasets import fetch_rrlyrae_combined
-from sklearn.svm import SVC
+from sklearn.neighbors import NearestCentroid
 from sklearn import metrics
 
 #Classifier Parametrization
 print('')
-classificador = SVC()
-print('Classification Algorithm: SVM')
+classificador = NearestCentroid()
+print('Classification Algorithm: Nearest Centroid')
 
 # as páginas citadas referem-se ao livro AstroML (Ivezic et al., 2014)
 #----------------------------------------------------------------------
